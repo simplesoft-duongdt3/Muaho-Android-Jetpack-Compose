@@ -8,13 +8,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Check
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.muaho.android_compose.ui.theme.MuaHoTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,16 +41,11 @@ fun Home(name: String) {
         Greeting(name = name)
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         ButtonWidget()
+
+        HelloContent()
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HomePreview() {
-    MuaHoTheme {
-        Home("Android")
-    }
-}
 
 @Composable
 fun Greeting(name: String) {
@@ -102,5 +99,45 @@ fun ButtonWidget() {
 fun ButtonPreview() {
     MuaHoTheme {
         ButtonWidget()
+    }
+}
+
+
+
+@Composable
+fun HelloContent() {
+    Column(modifier = Modifier.padding(16.dp)) {
+        var textValue by remember {
+            mutableStateOf("")
+        }
+
+        if (textValue.isNotEmpty()) {
+            Text(
+                text = "Hello, $textValue!",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = MaterialTheme.typography.h5
+            )
+        }
+        OutlinedTextField(
+            value = textValue,
+            onValueChange = { textValue = it },
+            label = { Text("Name") }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HelloContentPreview() {
+    MuaHoTheme {
+        HelloContent()
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun HomePreview() {
+    MuaHoTheme {
+        Home("Android")
     }
 }
