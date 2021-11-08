@@ -33,7 +33,7 @@ fun ShopItemWidget(
             ),
             contentDescription = null,
             modifier = Modifier.size(128.dp)
-                .clip(RoundedCornerShape(12.dp))                       // clip to the circle shape
+                .clip(RoundedCornerShape(12.dp))
                 .border(0.5.dp, MaterialTheme.colors.secondary, RoundedCornerShape(12.dp))
         )
         Text(
