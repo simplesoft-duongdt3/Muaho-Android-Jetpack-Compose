@@ -64,28 +64,48 @@ fun CategoryItemWidget(
 @ExperimentalFoundationApi
 @Composable
 fun CategoryList(categories: List<Category>) {
-    LazyVerticalGrid(
-        cells = GridCells.Fixed(count = 5),
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = "Danh mục cửa hàng",
+                style = MaterialTheme.typography.h6,
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "Xem tất cả",
+                color = MaterialTheme.colors.primary,
+                style = MaterialTheme.typography.caption,
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+        }
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(count = 5),
 
-        contentPadding = PaddingValues(
-            start = 8.dp,
-            top = 8.dp,
-            end = 8.dp,
-            bottom = 8.dp
-        ),
+            contentPadding = PaddingValues(
+                start = 8.dp,
+                top = 8.dp,
+                end = 8.dp,
+                bottom = 8.dp
+            ),
 
 
-        content = {
-            items(categories.size) { index ->
-                Box(Modifier.padding(8.dp)) {
-                    CategoryItemWidget(
-                        categories[index].name,
-                        categories[index].thumbUrl,
-                    )
+            content = {
+                items(categories.size) { index ->
+                    Box(Modifier.padding(8.dp)) {
+                        CategoryItemWidget(
+                            categories[index].name,
+                            categories[index].thumbUrl,
+                        )
+                    }
                 }
-            }
-        },
-    )
+            },
+        )
+    }
 }
 
 @ExperimentalFoundationApi
@@ -100,7 +120,12 @@ fun CategoryItemWidgetPreview() {
 fun fakeCategories(): List<Category> {
     val items = mutableListOf<Category>()
     for (i in 0..100) {
-        items.add(Category(name = "Category ${i+1}", thumbUrl = "https://picsum.photos/48/48?time=${i+1}"))
+        items.add(
+            Category(
+                name = "Category ${i + 1}",
+                thumbUrl = "https://picsum.photos/48/48?time=${i + 1}"
+            )
+        )
     }
     return items
 }

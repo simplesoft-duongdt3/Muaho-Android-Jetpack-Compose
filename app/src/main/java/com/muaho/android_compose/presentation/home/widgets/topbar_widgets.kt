@@ -34,7 +34,7 @@ fun TopBarWidget(
             .size(width = Dp.Infinity, height = 48.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(16.dp))
         Image(
             painter = rememberImagePainter(
                 data = thumbUrl,
@@ -48,7 +48,7 @@ fun TopBarWidget(
                 .border(0.5.dp, MaterialTheme.colors.secondary, RoundedCornerShape(4.dp))
                 .size(width = 40.dp, height = 40.dp)
         )
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(16.dp))
         Column(modifier = Modifier.weight(weight = 1f)) {
             Text(
                 "Xin chào",
@@ -85,6 +85,8 @@ fun TopBarWidget(
                     .padding(2.dp),
             )
         }
+
+        Spacer(modifier = Modifier.size(16.dp))
     }
 }
 
