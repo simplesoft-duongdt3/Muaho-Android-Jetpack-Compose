@@ -3,6 +3,7 @@ package com.muaho.android_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -19,22 +20,34 @@ import com.muaho.android_compose.ui.theme.MuaHoTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.muaho.android_compose.data.HomeRepositoryImpl
+import com.muaho.android_compose.presentation.home.HomeMapper
 import com.muaho.android_compose.presentation.home.HomeView
+import com.muaho.android_compose.presentation.home.HomeViewModel
 
 class MainActivity : ComponentActivity() {
     @ExperimentalPagerApi
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val viewModel by viewModels<HomeViewModel> {
+            HomeViewModel.Factory(
+                repository = HomeRepositoryImpl(),
+                homeMapper = HomeMapper(),
+            )
+        }
+
         setContent {
             MuaHoTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     MuaHoTheme {
-                        HomeView()
+                        HomeView(viewModel)
                     }
                 }
             }
         }
     }
+
+
 }

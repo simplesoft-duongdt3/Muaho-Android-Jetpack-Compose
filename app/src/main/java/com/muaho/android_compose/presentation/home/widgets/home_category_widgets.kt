@@ -2,31 +2,23 @@ package com.muaho.android_compose.presentation.home.widgets
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.muaho.android_compose.presentation.home.HomeState
 import com.muaho.android_compose.ui.theme.MuaHoTheme
-
-
-data class Category(
-    val name: String,
-    val thumbUrl: String,
-)
 
 @Composable
 fun CategoryItemWidget(
@@ -63,7 +55,7 @@ fun CategoryItemWidget(
 
 @ExperimentalFoundationApi
 @Composable
-fun CategoryList(categories: List<Category>) {
+fun CategoryList(categories: List<HomeState.SuccessState.Category>) {
     Column {
         Row(
             horizontalArrangement = Arrangement.Start,
@@ -117,11 +109,11 @@ fun CategoryItemWidgetPreview() {
     }
 }
 
-fun fakeCategories(): List<Category> {
-    val items = mutableListOf<Category>()
+fun fakeCategories(): List<HomeState.SuccessState.Category> {
+    val items = mutableListOf<HomeState.SuccessState.Category>()
     for (i in 0..100) {
         items.add(
-            Category(
+            HomeState.SuccessState.Category(
                 name = "Category ${i + 1}",
                 thumbUrl = "https://picsum.photos/48/48?time=${i + 1}"
             )
